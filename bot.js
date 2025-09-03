@@ -90,48 +90,48 @@ function getLineascanUrl(address) {
 // Random phrases for bot personality
 const phrases = {
     checking: [
-        '🔍 Digging through the blockchain, hunting for your tokens...',
-        '⚡ Casting Linea contract magic spells...',
-        '🎯 Targeting your allocation with precision...',
-        '🚀 Launching intergalactic scanner...',
-        '💎 Searching for your precious tokens...',
-        '🔮 Reading the contract crystal ball...',
-        '⚡ Hacking the blockchain to find the truth...'
+        '🔥 Hold the fuck up, checking your shit...',
+        '⚡ Calling the goddamn contract, wait up...',
+        '🎯 Scanning this address like a mad dog...',
+        '💀 Digging through blockchain hell for your tokens...',
+        '🚀 Launching nuclear scan, brace yourself...',
+        '🔮 Reading the fucking crystal ball...',
+        '⛓️ Chaining up the contract, let\'s see what you got...'
     ],
     success: [
-        '🎉 Bingo! Found your tokens!',
-        '💰 Treasure found! Here\'s your loot:',
-        '🚀 Let\'s go! Your allocation is ready:',
-        '💎 Jackpot! Check what you\'ve got:',
-        '🎯 Bulls-eye! Here\'s your result:',
-        '⚡ Lightning struck! Your allocation:',
-        '🔥 Fire! Here\'s what you earned:'
+        '💰 Holy shit! Found your fucking treasure!',
+        '🎉 Jackpot, motherfucker! Here\'s your loot:',
+        '🔥 Damn right! Your allocation is here:',
+        '💎 Sweet Jesus! Look at this beautiful allocation:',
+        '🚀 Boom! Your tokens are locked and loaded:',
+        '⚡ Lightning fucking strikes! Your share:',
+        '🎯 Bulls-fucking-eye! Check this out:'
     ],
     noAllocation: [
-        '😢 Sadly, the contract says you have 0 tokens...',
-        '💔 Bad news - allocation is empty',
-        '🤷‍♂️ Contract is silent, seems like nothing there',
-        '😔 Empty... but don\'t give up!',
-        '🚫 Zero allocation, but you\'re still awesome!'
+        '💔 Shit... contract says you got nothing, buddy',
+        '😤 Fuck me sideways, zero allocation here',
+        '🤷‍♂️ Contract is being a bitch, nothing found',
+        '💸 Empty as my soul... sorry mate',
+        '🔍 Searched everywhere, but you\'re broke here'
     ],
     batchStart: [
-        '🚀 Launching mass check! Prepare for data fireworks!',
-        '⚡ Checking a whole army of wallets! This will be epic!',
-        '🎯 Scanning your list like Terminator!',
-        '💎 Mass treasure hunt begins!',
-        '🔥 Batch mode activated! Hold tight!'
+        '🔥 Time to fuck shit up! Mass checking incoming!',
+        '💀 Unleashing chaos on your wallet army!',
+        '⚡ Going ballistic on this address list!',
+        '🚀 Nuclear batch mode activated, hold tight!',
+        '🎯 About to wreck this list like a savage!'
     ],
     errors: [
-        '🤖 Oops! Something went wrong in the matrix...',
-        '💥 Houston, we have problems!',
-        '🔧 Robot broke down, but I\'m fixing it...',
-        '⚠️ System glitch! Try again',
-        '🆘 SOS! Need blockchain tech support!'
+        '💥 Well, fuck! Something exploded...',
+        '🤬 Shit hit the fan, try again!',
+        '🔧 This piece of shit broke, fixing it...',
+        '⚠️ Damn glitch in the matrix!',
+        '💀 System\'s being a bitch right now!'
     ]
 };
 
 function getRandomPhrase(category) {
-    const categoryPhrases = phrases[category] || ['🤖 Something is happening...'];
+    const categoryPhrases = phrases[category] || ['💥 Some shit is happening...'];
     return categoryPhrases[Math.floor(Math.random() * categoryPhrases.length)];
 }
 
@@ -220,21 +220,21 @@ async function checkBatchAllocations(addresses) {
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
     const welcomeMessage = `
-🤖 **Hello! I'm Linea Hunter Bot!** 🔥
+💀 **Yo! I'm the Linea Allocation Bot!** 🔥
 
- YYS I'm not just a bot, I'm an airdrop hunter! My mission is to find all your treasures in the Linea blockchain!
+🖕 I'm not here to fuck around. I check your Linea allocation and that's it. No bullshit, no games.
 
-**🚀 What I can do:**
-• 💎 Check allocation for one wallet
-• ⚡ Check up to 50 wallets at once (insane power!)
-• 🔗 Provide direct Lineascan links
-• 🔮 Understand any list format
+**What I do:**
+• 💎 Check your wallet allocation (one address)
+• ⚡ Batch check up to 50 wallets (because I'm badass like that)
+• 🔗 Give you Lineascan links
+• 🤬 Understand any format you throw at me
 
-**🎯 How to use:**
-📱 Single wallet: just send the address
-📃 Multiple wallets: send a list (any format)
+**How to use this shit:**
+📱 Single wallet: just send the damn address
+📃 Multiple wallets: dump your list, any format
 
-**⚡ Examples:**
+**Examples:**
 \`0x1234...abcd\` - single wallet
 
 \`\`\`
@@ -242,13 +242,13 @@ bot.onText(/\/start/, (msg) => {
 0x5678...efgh  
 0x9abc...1234
 \`\`\`
-Or just paste your list - I'll find all addresses myself! 🤖
+Just paste your mess - I'll figure it out 💀
 
 **Commands:**
-/help - Help
+/help - If you're too dumb to figure this out
 /check <address> - Check specific address
 
-🔥 **Let's hunt for your tokens!** 🔥
+🔥 **Let's see what you fucking got!** 🔥
     `;
     
     bot.sendMessage(chatId, welcomeMessage, { parse_mode: 'Markdown' });
@@ -257,33 +257,33 @@ Or just paste your list - I'll find all addresses myself! 🤖
 bot.onText(/\/help/, (msg) => {
     const chatId = msg.chat.id;
     const helpMessage = `
-📖 **Help - Linea Hunter Bot** 🤖
+📖 **Help - Linea Allocation Bot** 💀
 
-**🔍 How it works:**
-• I call the calculateAllocation function of the Linea contract
+**How this shit works:**
+• I call the calculateAllocation function on the Linea contract
 • Contract: \`${CONTRACT_ADDRESS}\`
 • Network: Linea Mainnet
-• Result is processed (divided by 10^18) to show your allocation
-• I provide Lineascan link for each wallet
+• Result gets processed (divided by 10^18) to show your real allocation
+• I give you Lineascan links so you can verify yourself
 
-**💰 Usage:**
-• Send any Ethereum address to check
-• Or use \`/check <address>\` command
+**Usage:**
+• Send any Ethereum address and I'll check it
+• Or use \`/check <address>\` if you're fancy
 • Address format: 0x + 40 hex characters
-• Can check up to 50 addresses at once!
+• I can handle up to 50 addresses at once (try me!)
 
-**⚡ Examples:**
+**Examples:**
 \`/check 0x1234567890123456789012345678901234567890\`
 \`0x1234567890123456789012345678901234567890\`
 
-**🔥 Batch checking:**
+**Batch checking:**
 \`\`\`
 0x1111...
 0x2222...
 0x3333...
 \`\`\`
 
-Need help? Contact the developer! 🛠️
+Need more help? Figure it out yourself! 🖕
     `;
     
     bot.sendMessage(chatId, helpMessage, { parse_mode: 'Markdown' });
@@ -317,12 +317,12 @@ bot.on('message', async (msg) => {
         // Multiple addresses - batch check
         if (addresses.length > 50) {
             bot.sendMessage(chatId, `
-⚠️ **Too many addresses!**
+⚠️ **Whoa there, hotshot!**
 
-Maximum 50 addresses at once. You have ${addresses.length}.
-Split your list into parts or send the first 50.
+I can only handle 50 addresses at once, you sent ${addresses.length}.
+Split that shit up or send me the first 50.
 
-🔥 I'm ready to process your wallet army, but in batches!
+🔥 I'm powerful but not fucking magical!
             `, { parse_mode: 'Markdown' });
             return;
         }
@@ -331,15 +331,15 @@ Split your list into parts or send the first 50.
     } else if (text.length > 10) {
         // No valid addresses found but text is long enough
         bot.sendMessage(chatId, `
-❌ **No valid addresses found!**
+❌ **What the fuck is this garbage?**
 
-Make sure addresses are in format: 0x + 40 hex characters
+I need valid Ethereum addresses: 0x + 40 hex characters
 
-**Examples of valid addresses:**
+**Examples of addresses that don't suck:**
 \`0x1234567890123456789012345678901234567890\`
 \`0xabcdefabcdefabcdefabcdefabcdefabcdefabcd\`
 
-🤖 I'm smart, but not smart enough to guess what you meant!
+💀 I'm smart but I can't read your mind, asshole!
         `, { parse_mode: 'Markdown' });
     }
 });
@@ -349,13 +349,13 @@ async function handleAllocationCheck(chatId, address) {
     // Validate address format
     if (!isValidAddress(address)) {
         bot.sendMessage(chatId, `
-❌ **Invalid address!**
+❌ **Invalid fucking address!**
 
-Address must be in format: 0x + 40 hex characters
+Address format: 0x + 40 hex characters
 
 **Example:** \`0x1234567890123456789012345678901234567890\`
 
-🤖 Check carefully - one character can ruin everything!
+💀 Check your shit before wasting my time!
         `, { parse_mode: 'Markdown' });
         return;
     }
@@ -378,27 +378,27 @@ Address must be in format: 0x + 40 hex characters
 ${getRandomPhrase('noAllocation')}
 
 **Address:** \`${address}\`
-**Allocation:** **0** tokens 😢
+**Allocation:** **0** tokens 💸
 
-🔗 **Lineascan:** [View wallet](${getLineascanUrl(address)})
+🔗 **Lineascan:** [Check it yourself](${getLineascanUrl(address)})
 
-💡 Don't give up! Maybe next time you'll be luckier!
+🖕 Better luck next time, loser!
                 `;
             } else {
                 responseMessage = `
 ${getRandomPhrase('success')}
 
 **Address:** \`${address}\`
-**Your allocation:** **${allocation}** tokens 🎉
+**Your allocation:** **${allocation}** tokens 💰
 
 **Details:**
 • Raw value: \`${result.rawValue}\`
 • Processed allocation: \`${allocation}\`
 • Contract: \`${CONTRACT_ADDRESS}\`
 
-🔗 **Lineascan:** [View wallet](${getLineascanUrl(address)})
+🔗 **Lineascan:** [Verify this shit](${getLineascanUrl(address)})
 
-💰 Congratulations on your allocation! 🚀
+🔥 Now fuck off and enjoy your tokens! 🚀
                 `;
             }
             
@@ -416,11 +416,11 @@ ${getRandomPhrase('errors')}
 **Error:** ${result.error}
 
 Possible reasons:
-• Network issues
-• RPC overload
-• Contract temporarily unavailable
+• Network is being a bitch
+• RPC is overloaded
+• Contract is having a bad day
 
-🔄 Try again in a minute!
+🔄 Try again in a fucking minute!
             `;
             
             bot.editMessageText(errorMessage, {
@@ -435,7 +435,7 @@ Possible reasons:
         bot.editMessageText(`
 ${getRandomPhrase('errors')}
 
-An unexpected error occurred. Try again!
+Something fucked up royally. Try again!
 
 **Error:** ${error.message}
         `, {
@@ -460,9 +460,9 @@ async function handleBatchCheck(chatId, addresses) {
         
         // Build response message
         let responseMessage = `
-🎊 **Batch check completed!**
+🔥 **Batch check complete, motherfucker!**
 
-📊 **Statistics:**
+📊 **Stats:**
 • Total checked: ${summary.total}
 • Found with allocation: ${summary.found}
 • Total allocation: ${summary.totalAllocation} tokens
@@ -470,7 +470,7 @@ async function handleBatchCheck(chatId, addresses) {
 `;
 
         if (summary.found > 0) {
-            responseMessage += `\n💰 **Found allocations:**\n`;
+            responseMessage += `\n💰 **Winners:**\n`;
             
             results.forEach((result, index) => {
                 if (result.success && result.allocation !== '0') {
@@ -482,26 +482,26 @@ async function handleBatchCheck(chatId, addresses) {
         // Show zero allocations (first 10)
         const zeroResults = results.filter(r => r.success && r.allocation === '0');
         if (zeroResults.length > 0) {
-            responseMessage += `\n😔 **Zero allocations (first 10):**\n`;
+            responseMessage += `\n💸 **Broke ass wallets (first 10):**\n`;
             zeroResults.slice(0, 10).forEach((result, index) => {
                 responseMessage += `${index + 1}. [${result.address.slice(0, 8)}...](${getLineascanUrl(result.address)}) → 0\n`;
             });
             
             if (zeroResults.length > 10) {
-                responseMessage += `... and ${zeroResults.length - 10} more addresses with zero allocation\n`;
+                responseMessage += `... and ${zeroResults.length - 10} more broke wallets\n`;
             }
         }
         
         // Show errors if any
         const errorResults = results.filter(r => !r.success);
         if (errorResults.length > 0) {
-            responseMessage += `\n❌ **Errors (${errorResults.length}):**\n`;
+            responseMessage += `\n❌ **Fucked up addresses (${errorResults.length}):**\n`;
             errorResults.slice(0, 5).forEach((result, index) => {
                 responseMessage += `${index + 1}. ${result.address.slice(0, 8)}... - ${result.error}\n`;
             });
         }
         
-        responseMessage += `\n🔥 **Check completed! Good luck with your tokens!** 🚀`;
+        responseMessage += `\n💀 **Done! Now get the fuck out!** 🖕`;
         
         bot.editMessageText(responseMessage, {
             chat_id: chatId,
@@ -516,9 +516,9 @@ async function handleBatchCheck(chatId, addresses) {
         bot.editMessageText(`
 ${getRandomPhrase('errors')}
 
-Error during batch check: ${error.message}
+Batch check went to shit: ${error.message}
 
-🔄 Try splitting your list into parts or check later.
+🔄 Split your list or try again later, dipshit.
         `, {
             chat_id: chatId,
             message_id: checkingMsg.message_id,
