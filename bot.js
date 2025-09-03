@@ -185,9 +185,24 @@ async function checkBatchAllocations(addresses) {
     const results = [];
     let totalFound = 0;
     let totalAllocation = BigInt(0);
+    const processedAddresses = new Set(); // Track processed addresses to avoid duplicates
     
     for (let i = 0; i < addresses.length; i++) {
         const address = addresses[i];
+        const normalizedAddress = address.toLowerCase();
+        
+        // Check if we already processed this address
+        if (processedAddresses.has(normalizedAddress)) {
+            results.push({
+                address,
+                success: true,
+                allocation: 'duplicate',
+                isDuplicate: true
+            });
+            continue;
+        }
+        
+        processedAddresses.add(normalizedAddress);
         const result = await checkAllocation(address);
         
         if (result.success && result.allocation !== '0') {
@@ -210,6 +225,8 @@ async function checkBatchAllocations(addresses) {
         results,
         summary: {
             total: addresses.length,
+            unique: processedAddresses.size,
+            duplicates: addresses.length - processedAddresses.size,
             found: totalFound,
             totalAllocation: totalAllocation.toString()
         }
@@ -463,9 +480,11 @@ async function handleBatchCheck(chatId, addresses) {
 🔥 **Batch check complete, motherfucker!**
 
 📊 **Stats:**
-• Total checked: ${summary.total}
-• Found with allocation: ${summary.found}
-• Total allocation: ${summary.totalAllocation} tokens
+• Total addresses: ${summary.total}
+• Unique addresses: ${summary.unique}
+• Duplicates found: ${summary.duplicates}
+• Wallets with allocation: ${summary.found}
+• **TOTAL ALLOCATION: ${summary.totalAllocation} tokens** 💰
 
 `;
 
@@ -473,14 +492,14 @@ async function handleBatchCheck(chatId, addresses) {
             responseMessage += `\n💰 **Winners:**\n`;
             
             results.forEach((result, index) => {
-                if (result.success && result.allocation !== '0') {
+                if (result.success && result.allocation !== '0' && !result.isDuplicate) {
                     responseMessage += `${index + 1}. [${result.address.slice(0, 8)}...](${getLineascanUrl(result.address)}) → **${result.allocation}** tokens\n`;
                 }
             });
         }
         
         // Show zero allocations (first 10)
-        const zeroResults = results.filter(r => r.success && r.allocation === '0');
+        const zeroResults = results.filter(r => r.success && r.allocation === '0' && !r.isDuplicate);
         if (zeroResults.length > 0) {
             responseMessage += `\n💸 **Broke ass wallets (first 10):**\n`;
             zeroResults.slice(0, 10).forEach((result, index) => {
@@ -489,6 +508,18 @@ async function handleBatchCheck(chatId, addresses) {
             
             if (zeroResults.length > 10) {
                 responseMessage += `... and ${zeroResults.length - 10} more broke wallets\n`;
+            }
+        }
+        
+        // Show duplicates if any
+        const duplicateResults = results.filter(r => r.isDuplicate);
+        if (duplicateResults.length > 0) {
+            responseMessage += `\n🔄 **Duplicate addresses (${duplicateResults.length}):**\n`;
+            duplicateResults.slice(0, 5).forEach((result, index) => {
+                responseMessage += `${index + 1}. ${result.address.slice(0, 8)}... - already checked\n`;
+            });
+            if (duplicateResults.length > 5) {
+                responseMessage += `... and ${duplicateResults.length - 5} more duplicates\n`;
             }
         }
         
