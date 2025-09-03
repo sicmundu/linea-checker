@@ -1,0 +1,37 @@
+{
+  "name": "linea-allocation-checker-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot for checking Linea token allocation through EVM contract calls",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "dev": "node bot.js",
+    "test": "node test-contract.js",
+    "setup": "node setup.js",
+    "test-enhanced": "echo 'Enhanced bot features: Batch checking, Lineascan links, Enhanced validation, Lively personality'",
+    "pm2:start": "pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 stop linea-checker",
+    "pm2:restart": "pm2 restart linea-checker",
+    "pm2:delete": "pm2 delete linea-checker",
+    "pm2:logs": "pm2 logs linea-checker",
+    "pm2:monit": "pm2 monit"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "linea",
+    "ethereum",
+    "blockchain",
+    "allocation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.64.0",
+    "ethers": "^6.7.1",
+    "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
